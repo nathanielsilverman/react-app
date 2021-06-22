@@ -10,7 +10,7 @@ const initialState = {
 	loading: false,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
 	switch (action.type) {
 		case GET_ITEMS:
 			return {
@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
 		case ADD_ITEM:
 			return {
 				...state,
-				items: [action.payload, ...state.items],
+				items: [...state.items, action.payload],
 			};
 
 		case ITEMS_LOADING:
