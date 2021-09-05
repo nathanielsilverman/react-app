@@ -3,6 +3,7 @@ import {
 	ADD_ITEM,
 	DELETE_ITEM,
 	ITEMS_LOADING,
+	UPDATE_ITEM,
 } from "../actions/types";
 
 const initialState = {
@@ -29,6 +30,12 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				items: [...state.items, action.payload],
+			};
+
+		case UPDATE_ITEM:
+			return {
+				...state,
+				items: [...state.items],
 			};
 
 		case ITEMS_LOADING:

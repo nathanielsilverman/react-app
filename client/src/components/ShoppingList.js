@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
+import {
+	Container,
+	Button,
+	ListGroup,
+	ListGroupItem,
+	CardTitle,
+} from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
 import { getItems, deleteItem } from "../actions/itemActions";
+import ItemQuantity from "./ItemQuantity";
 import PropTypes from "prop-types";
 
 class ShoppingList extends Component {
@@ -20,25 +27,59 @@ class ShoppingList extends Component {
 			<Container>
 				<ListGroup>
 					<TransitionGroup className="shopping-list">
-						{items.map(({ _id, name }) => (
+						{items.map(({ _id, name, quantity }) => (
 							<CSSTransition
-								key={_id}
 								timeout={500}
 								classname="fade"
+								key={_id}
 							>
-								<ListGroupItem>
-									<Button
-										className="remove-btn"
-										color="danger"
-										size="sm"
-										onClick={this.onDeleteClick.bind(
-											this,
-											_id
-										)}
-									>
-										&times;
-									</Button>
-									{name}
+								<ListGroupItem
+									style={{
+										borderColor: "white",
+										margin: "1",
+									}}
+									key={_id}
+								>
+									<div style={{ display: "inline-flex" }}>
+										<CardTitle
+											style={{
+												textTransform: "capitalize",
+												alignSelf: "Left",
+												display: "flex",
+												paddingRight: 40,
+												marginRight: 30,
+												width: 100,
+											}}
+										>
+											{name}
+										</CardTitle>
+										<ItemQuantity
+											style={{
+												display: "flex",
+												marginRight: 30,
+												width: 100,
+											}}
+											id={_id}
+											quantity={quantity}
+											name={name}
+										/>
+										<Button
+											style={{
+												display: "flex",
+												marginLeft: 100,
+												align: "right",
+											}}
+											className="remove-btn"
+											color="danger"
+											size="sm"
+											onClick={this.onDeleteClick.bind(
+												this,
+												_id
+											)}
+										>
+											&times;
+										</Button>
+									</div>
 								</ListGroupItem>
 							</CSSTransition>
 						))}

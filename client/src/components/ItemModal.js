@@ -45,6 +45,40 @@ class ItemModal extends Component {
 	render() {
 		return (
 			<div>
+				<Modal
+					centered
+					returnFocusAfterClose
+					isOpen={this.state.modal}
+					toggle={this.toggle}
+					autoFocus={false}
+				>
+					<Form name="addItemForm" onSubmit={this.onSubmit}>
+						<ModalHeader>Add To Shopping List</ModalHeader>
+						<ModalBody>
+							{/* <FormGroup> */}
+							{/* <Label for="item">Item</Label> */}
+							<Input
+								autoFocus={true}
+								type="text"
+								name="name"
+								required="string"
+								id="item"
+								placeholder="Add shopping item"
+								onChange={this.onChange}
+							/>
+							<Button
+								color="dark"
+								style={{ marginTop: "2rem" }}
+								block
+								type="submit"
+							>
+								Add Item
+							</Button>
+							{/* </FormGroup> */}
+						</ModalBody>
+					</Form>
+				</Modal>
+
 				<Button
 					color="dark"
 					stlye={{ marginBottom: "2rem" }}
@@ -52,32 +86,6 @@ class ItemModal extends Component {
 				>
 					Add Item
 				</Button>
-				<Modal isOpen={this.state.modal} toggle={this.toggle}>
-					<ModalHeader toggle={this.toggle}>
-						Add To Shopping List
-					</ModalHeader>
-					<ModalBody>
-						<Form onSubmit={this.onSubmit}>
-							<FormGroup>
-								<Label for="item">Item</Label>
-								<Input
-									type="text"
-									name="name"
-									id="item"
-									placeholder="Add shopping item"
-									onChange={this.onChange}
-								></Input>
-								<Button
-									color="dark"
-									style={{ marginTop: "2rem" }}
-									block
-								>
-									Add Item
-								</Button>
-							</FormGroup>
-						</Form>
-					</ModalBody>
-				</Modal>
 			</div>
 		);
 	}

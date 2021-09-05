@@ -19,8 +19,30 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
 	const newItem = new Item({
 		name: req.body.name,
+		date: Date.now(),
 	});
 	newItem.save().then((item) => res.json(item));
+});
+
+// @route POST api/items/:id
+// @desc Update an Item
+// @access Public
+router.post("/:id", (req, res) => {
+	const newItem = new Item({
+		_id: req.body.id,
+		quantity: req.body.quantity,
+		name: req.body.name,
+	});
+	Item.findOneAndUpdate({ _id: req.body.id }, newItem, {
+		new: true,
+		useFindAndModify: false,
+	})
+		.then((item) => {
+			res.json(item);
+		})
+		.catch((err) => {
+			res.status(404).json({ success: false });
+		});
 });
 
 // @route DELETE api/items/:id
